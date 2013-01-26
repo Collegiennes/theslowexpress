@@ -4,28 +4,18 @@ using UnityEngine;
 
 public enum GamePhase
 {
-    Movement, Shooting
-}
-public static class GamePhasesExtensions
-{
-    public static GamePhase GetNextEvent(this GamePhase current)
-    {
-        switch (current)
-        {
-            case GamePhase.Movement: return GamePhase.Shooting;
-            case GamePhase.Shooting: return GamePhase.Movement;
-        }
-        throw new NotImplementedException();
-    }
+    IntroFastMove = -1, Moving, Grabbing
 }
 
 class TimeKeeper : MonoBehaviour
 {
-    public float MovementPhaseDuration;
-    public float ShootingPhaseDuration;
+    public float IntroDuration = 0;
+    public float MovementDuration = 0;
+    public float ShootingDuration = 0;
 
     float CurrentPhaseTime;
     float CurrentPhaseDuration;
+    float DestinationTimeFactor;
 
     public float CurrentTimeRatio { get; private set; }
     public float CurrentTimeFactor { get; private set; }
@@ -54,8 +44,8 @@ class TimeKeeper : MonoBehaviour
 
     void Start()
     {
-        CurrentPhase = GamePhase.Shooting;
-        ChangePhase();
+        CurrentPhase = GamePhase.IntroFastMove;
+        CurrentPhaseDuration = IntroDuration;
 
         PhaseChanged += () => Debug.Log("PHASE CHANGE! " + CurrentPhase);
     }
@@ -63,9 +53,18 @@ class TimeKeeper : MonoBehaviour
     void Update()
     {
         CurrentPhaseTime += Time.deltaTime;
-        CurrentTimeFactor = CurrentPhase == GamePhase.Movement
-                                ? ShootingPhaseDuration / MovementPhaseDuration
-                                : 1;
+
+        switch (CurrentPhase)
+        {
+            case GamePhase.IntroFastMove:
+            case GamePhase.Grabbing:
+                CurrentTimeFactor = 1;
+                break;
+
+            case GamePhase.Moving:
+                CurrentTimeFactor = ShootingDuration / MovementDuration;
+                break;
+        }
 
         CurrentTimeRatio = CurrentPhaseTime / CurrentPhaseDuration;
 
@@ -75,7 +74,7 @@ class TimeKeeper : MonoBehaviour
 
     void ChangePhase()
     {
-        CurrentPhase = CurrentPhase.GetNextEvent();
+        CurrentPhase = (GamePhase) (((int)CurrentPhase + 1) % 2);
         CurrentPhaseTime = 0;
         CurrentTimeRatio = 0;
 
@@ -84,13 +83,8 @@ class TimeKeeper : MonoBehaviour
 
         switch (CurrentPhase)
         {
-            case GamePhase.Movement:
-                CurrentPhaseDuration = MovementPhaseDuration;
-                break;
-
-            case GamePhase.Shooting:
-                CurrentPhaseDuration = ShootingPhaseDuration;
-                break;
+            case GamePhase.Moving: CurrentPhaseDuration = MovementDuration; break;
+            case GamePhase.Grabbing: CurrentPhaseDuration = ShootingDuration; break;
         }
     }
 }

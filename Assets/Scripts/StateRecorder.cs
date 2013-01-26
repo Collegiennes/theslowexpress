@@ -20,7 +20,10 @@ class StateRecorder : MonoBehaviour
     {
         var timeRatio = TimeKeeper.CurrentTimeRatio;
 
-        if (TimeKeeper.CurrentPhase == GamePhase.Movement)
+        if (TimeKeeper.CurrentPhase == GamePhase.IntroFastMove)
+            return;
+
+        if (TimeKeeper.CurrentPhase == GamePhase.Moving)
         {
             RecordedFrames.Add(new StateFrame
             {
@@ -55,7 +58,7 @@ class StateRecorder : MonoBehaviour
 
     void OnPhaseChanged()
     {
-        if (TimeKeeper.CurrentPhase == GamePhase.Movement)
+        if (TimeKeeper.CurrentPhase == GamePhase.Moving)
             RecordedFrames.Clear();
         else
             LastFrameIndex = 0;
