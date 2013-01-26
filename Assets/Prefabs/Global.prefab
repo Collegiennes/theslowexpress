@@ -155,8 +155,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fe2b73a68794f74c9ba251160716651, type: 3}
   m_Name: 
-  MovementPhaseDuration: 0
-  ShootingPhaseDuration: 0
+  IntroDuration: 0
+  MovementDuration: 0
+  ShootingDuration: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
