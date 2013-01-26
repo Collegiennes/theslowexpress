@@ -40,21 +40,25 @@ class StateRecorder : MonoBehaviour
             fromFrameIndex--;
 
             var isFirstFrame = fromFrameIndex == -1;
-            var fromFrame = isFirstFrame ? RecordedFrames[0] : RecordedFrames[fromFrameIndex];
-            var toFrame = RecordedFrames[fromFrameIndex + 1];
+            var isLastFrame = fromFrameIndex == RecordedFrames.Count - 1;
 
-            var gradient = isFirstFrame ? 0 : Mathf.Clamp01((timeRatio - fromFrame.TimeRatio) / (toFrame.TimeRatio - fromFrame.TimeRatio));
+            var fromFrame = isFirstFrame ? RecordedFrames[0] : RecordedFrames[fromFrameIndex];
+            var toFrame = isLastFrame ? RecordedFrames[RecordedFrames.Count - 1] : RecordedFrames[fromFrameIndex + 1];
+
+            var gradient = isFirstFrame || isLastFrame ? 0 : Mathf.Clamp01((timeRatio - fromFrame.TimeRatio) / (toFrame.TimeRatio - fromFrame.TimeRatio));
             transform.position = Vector3.Lerp(fromFrame.Position, toFrame.Position, gradient);
+
+            LastFrameIndex = fromFrameIndex;
+            //Debug.Log("last frame is " + fromFrameIndex + " for time ratio = " + timeRatio);
         }
     }
 
     void OnPhaseChanged()
     {
         if (TimeKeeper.CurrentPhase == GamePhase.Movement)
-        {
             RecordedFrames.Clear();
+        else
             LastFrameIndex = 0;
-        }
     }
 }
 
