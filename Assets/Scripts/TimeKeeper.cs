@@ -9,17 +9,18 @@ public enum GamePhase
 
 class TimeKeeper : MonoBehaviour
 {
-    public float IntroDuration = 0;
-    public float MovementDuration = 0;
-    public float ShootingDuration = 0;
+    public float IntroDuration = 5;
+    public float MovementDuration = 4;
+    public float ShootingDuration = 2;
 
-    float CurrentPhaseTime;
-    float CurrentPhaseDuration;
-    float DestinationTimeFactor;
+    float PhaseTime;
+    float PhaseDuration;
+    float TimeFactor;
 
-    public float CurrentTimeRatio { get; private set; }
-    public float CurrentTimeFactor { get; private set; }
-    public GamePhase CurrentPhase { get; private set; }
+    public float GlobalTime { get; private set; }
+    public float TimeRatio { get; private set; }
+    public float DeltaTime { get; private set; }
+    public GamePhase Phase { get; private set; }
 
     public event Action PhaseChanged;
 
@@ -44,47 +45,49 @@ class TimeKeeper : MonoBehaviour
 
     void Start()
     {
-        CurrentPhase = GamePhase.IntroFastMove;
-        CurrentPhaseDuration = IntroDuration;
+        Phase = GamePhase.IntroFastMove;
+        PhaseDuration = IntroDuration;
 
-        PhaseChanged += () => Debug.Log("PHASE CHANGE! " + CurrentPhase);
+        PhaseChanged += () => Debug.Log("PHASE CHANGE! " + Phase);
     }
 
     void Update()
     {
-        CurrentPhaseTime += Time.deltaTime;
+        PhaseTime += Time.deltaTime;
 
-        switch (CurrentPhase)
+        switch (Phase)
         {
             case GamePhase.IntroFastMove:
             case GamePhase.Grabbing:
-                CurrentTimeFactor = 1;
+                TimeFactor = 1;
                 break;
 
             case GamePhase.Moving:
-                CurrentTimeFactor = ShootingDuration / MovementDuration;
+                TimeFactor = ShootingDuration / MovementDuration;
                 break;
         }
 
-        CurrentTimeRatio = CurrentPhaseTime / CurrentPhaseDuration;
+        DeltaTime = Time.deltaTime * TimeFactor;
+        GlobalTime += DeltaTime;
+        TimeRatio = PhaseTime / PhaseDuration;
 
-        if (CurrentPhaseTime >= CurrentPhaseDuration)
+        if (PhaseTime >= PhaseDuration)
             ChangePhase();
     }
 
     void ChangePhase()
     {
-        CurrentPhase = (GamePhase) (((int)CurrentPhase + 1) % 2);
-        CurrentPhaseTime = 0;
-        CurrentTimeRatio = 0;
+        Phase = (GamePhase) (((int)Phase + 1) % 2);
+        PhaseTime = 0;
+        TimeRatio = 0;
 
         if (PhaseChanged != null)
             PhaseChanged();
 
-        switch (CurrentPhase)
+        switch (Phase)
         {
-            case GamePhase.Moving: CurrentPhaseDuration = MovementDuration; break;
-            case GamePhase.Grabbing: CurrentPhaseDuration = ShootingDuration; break;
+            case GamePhase.Moving: PhaseDuration = MovementDuration; break;
+            case GamePhase.Grabbing: PhaseDuration = ShootingDuration; break;
         }
     }
 }

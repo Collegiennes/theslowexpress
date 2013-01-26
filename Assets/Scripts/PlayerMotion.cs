@@ -22,15 +22,25 @@ public class PlayerMotion : MonoBehaviour
 	
     void Update()
     {
-        Vector3 input = new Vector2(
-            Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if(input.sqrMagnitude > 1) input = input.normalized;
-        input = RemoveDeadzone(input, 0.1f);
-        if(input.sqrMagnitude > 0) input = input / Mathf.Sqrt(input.magnitude);
-        Vector3 targetVelocity = 40 * input + Vector3.forward * 20;
+        switch (TimeKeeper.Instance.Phase)
+        {
+            case GamePhase.Moving:
+            case GamePhase.IntroFastMove:
+                Vector3 input = new Vector2(
+                    Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+                if(input.sqrMagnitude > 1) input = input.normalized;
+                input = RemoveDeadzone(input, 0.1f);
+                if(input.sqrMagnitude > 0) input = input / Mathf.Sqrt(input.magnitude);
+                Vector3 targetVelocity = 40 * input + Vector3.forward * 20;
 
-        velocity = CoolSmooth.ExpoLinear(
-            velocity, targetVelocity, 0.99f, 40, Time.deltaTime);
-        transform.position += velocity * Time.deltaTime;
+                velocity = CoolSmooth.ExpoLinear(
+                    velocity, targetVelocity, 0.99f, 40, TimeKeeper.Instance.DeltaTime);
+                transform.position += velocity * TimeKeeper.Instance.DeltaTime;
+                break;
+
+            case GamePhase.Grabbing:
+                // TODO
+                break;
+        }
     }
 }

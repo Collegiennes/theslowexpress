@@ -18,17 +18,18 @@ class StateRecorder : MonoBehaviour
 
     void Update()
     {
-        var timeRatio = TimeKeeper.CurrentTimeRatio;
+        var timeRatio = TimeKeeper.TimeRatio;
 
-        if (TimeKeeper.CurrentPhase == GamePhase.IntroFastMove)
+        if (TimeKeeper.Phase == GamePhase.IntroFastMove)
             return;
 
-        if (TimeKeeper.CurrentPhase == GamePhase.Moving)
+        if (TimeKeeper.Phase == GamePhase.Moving)
         {
             RecordedFrames.Add(new StateFrame
             {
                 TimeRatio = timeRatio,
-                Position = transform.position
+                Position = transform.position,
+                Rotation = transform.rotation
             });
         }
         else
@@ -50,6 +51,7 @@ class StateRecorder : MonoBehaviour
 
             var gradient = isFirstFrame || isLastFrame ? 0 : Mathf.Clamp01((timeRatio - fromFrame.TimeRatio) / (toFrame.TimeRatio - fromFrame.TimeRatio));
             transform.position = Vector3.Lerp(fromFrame.Position, toFrame.Position, gradient);
+            transform.rotation = Quaternion.Slerp(fromFrame.Rotation, toFrame.Rotation, gradient);
 
             LastFrameIndex = fromFrameIndex;
             //Debug.Log("last frame is " + fromFrameIndex + " for time ratio = " + timeRatio);
@@ -58,7 +60,7 @@ class StateRecorder : MonoBehaviour
 
     void OnPhaseChanged()
     {
-        if (TimeKeeper.CurrentPhase == GamePhase.Moving)
+        if (TimeKeeper.Phase == GamePhase.Moving)
             RecordedFrames.Clear();
         else
             LastFrameIndex = 0;
@@ -69,4 +71,5 @@ struct StateFrame
 {
     public float TimeRatio;
     public Vector3 Position;
+    public Quaternion Rotation;
 }

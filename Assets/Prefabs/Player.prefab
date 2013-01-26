@@ -27,6 +27,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400006}
+  - 114: {fileID: 11400008}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -142,6 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aad5676347c71d4793ad4a7081f2078, type: 3}
   m_Name: 
   distance: 5
+  oldTime: 0
+  oldPosition: {x: 0, y: 0, z: 0}
+  vel: {x: 0, y: 0, z: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -154,6 +158,16 @@ MonoBehaviour:
   m_Name: 
   tailPrefab: {fileID: 11400004, guid: 74338411165348d4caac3cae2a95a330, type: 2}
   length: 15
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e794e323db7eade44a9e02d379a725b9, type: 3}
+  m_Name: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

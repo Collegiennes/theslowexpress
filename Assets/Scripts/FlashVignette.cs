@@ -2,7 +2,7 @@
 
 class FlashVignette : MonoBehaviour
 {
-    public Texture2D VignetteTexture;
+    public Texture2D VignetteTexture = null;
 
     public float FadeInPortion = 0.05f;
     public float FadeOutPortion = 0.25f;
@@ -13,13 +13,13 @@ class FlashVignette : MonoBehaviour
         float alpha = 0;
         TimeKeeper tk = TimeKeeper.Instance;
 
-        switch (tk.CurrentPhase)
+        switch (tk.Phase)
         {
             case GamePhase.Moving:
-                if (tk.CurrentTimeRatio < FadeOutPortion)
-                    alpha = (1 - Mathf.Clamp01(tk.CurrentTimeRatio / FadeOutPortion)) * FadeOutMaxValue;
-                if (tk.CurrentTimeRatio > 1 - FadeInPortion)
-                    alpha = Mathf.Clamp01((tk.CurrentTimeRatio - (1 - FadeInPortion)) / FadeInPortion);
+                if (tk.TimeRatio < FadeOutPortion)
+                    alpha = (1 - Mathf.Clamp01(tk.TimeRatio / FadeOutPortion)) * FadeOutMaxValue;
+                if (tk.TimeRatio > 1 - FadeInPortion)
+                    alpha = Mathf.Clamp01((tk.TimeRatio - (1 - FadeInPortion)) / FadeInPortion);
                 break;
         }
 
