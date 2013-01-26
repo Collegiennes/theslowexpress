@@ -109,11 +109,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1732049091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b04776ec139dde43b481d7a6000b018, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fe2b73a68794f74c9ba251160716651, type: 3}
   m_Name: 
-  StopTimelineEvery: 2
-  StopTimelineFor: 5
-  DebugBypass: 0
+  MovementPhaseDuration: 8
+  ShootingPhaseDuration: 4
 --- !u!1 &2100756850
 GameObject:
   m_ObjectHideFlags: 0
