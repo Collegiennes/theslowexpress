@@ -600,6 +600,7 @@ MonoBehaviour:
   IntroDuration: 3
   MovementDuration: 4
   ShootingDuration: 2
+  DebugMode: 0
 --- !u!1 &2098079683
 GameObject:
   m_ObjectHideFlags: 0

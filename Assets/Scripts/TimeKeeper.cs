@@ -12,6 +12,7 @@ class TimeKeeper : MonoBehaviour
     public float IntroDuration = 5;
     public float MovementDuration = 4;
     public float ShootingDuration = 2;
+    public bool DebugMode = false;
 
     float PhaseTime;
     float PhaseDuration;
@@ -71,7 +72,7 @@ class TimeKeeper : MonoBehaviour
         GlobalTime += DeltaTime;
         TimeRatio = PhaseTime / PhaseDuration;
 
-        if (PhaseTime >= PhaseDuration)
+        if (!DebugMode && PhaseTime >= PhaseDuration)
             ChangePhase();
     }
 
