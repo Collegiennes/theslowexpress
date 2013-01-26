@@ -5,11 +5,6 @@ public class PlayerMotion : MonoBehaviour
 {
     Vector3 velocity;
 
-	void Start ()
-    {
-
-	}
-
     Vector2 RemoveDeadzone(Vector2 input, float deadzone)
     {
         float mag = input.magnitude;
@@ -29,13 +24,13 @@ public class PlayerMotion : MonoBehaviour
     {
         Vector3 input = new Vector2(
             Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if(input.sqrMagnitude > 1) input = input.normalized;
         input = RemoveDeadzone(input, 0.1f);
+        if(input.sqrMagnitude > 0) input = input / Mathf.Sqrt(input.magnitude);
         Vector3 targetVelocity = 40 * input + Vector3.forward * 20;
 
-        float t = Mathf.Pow(0.0003f, Time.deltaTime);
-        velocity = velocity * t + targetVelocity * (1-t);
-        velocity = Vector3.MoveTowards(velocity, targetVelocity, 10*Time.deltaTime);
-
+        velocity = CoolSmooth.ExpoLinear(
+            velocity, targetVelocity, 0.99f, 40, Time.deltaTime);
         transform.position += velocity * Time.deltaTime;
     }
 }
