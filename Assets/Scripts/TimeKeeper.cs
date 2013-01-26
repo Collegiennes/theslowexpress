@@ -63,6 +63,10 @@ class TimeKeeper : MonoBehaviour
     void Update()
     {
         CurrentPhaseTime += Time.deltaTime;
+        CurrentTimeFactor = CurrentPhase == GamePhase.Movement
+                                ? ShootingPhaseDuration / MovementPhaseDuration
+                                : 1;
+
         CurrentTimeRatio = CurrentPhaseTime / CurrentPhaseDuration;
 
         if (CurrentPhaseTime >= CurrentPhaseDuration)
@@ -73,6 +77,7 @@ class TimeKeeper : MonoBehaviour
     {
         CurrentPhase = CurrentPhase.GetNextEvent();
         CurrentPhaseTime = 0;
+        CurrentTimeRatio = 0;
 
         if (PhaseChanged != null)
             PhaseChanged();
