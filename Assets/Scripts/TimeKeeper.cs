@@ -21,8 +21,8 @@ public static class GamePhasesExtensions
 
 class TimeKeeper : MonoBehaviour
 {
-    public float MovementPhaseDuration;
-    public float ShootingPhaseDuration;
+    public float MovementPhaseDuration = 0;
+    public float ShootingPhaseDuration = 0;
 
     float CurrentPhaseTime;
     float CurrentPhaseDuration;
