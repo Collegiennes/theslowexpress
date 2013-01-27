@@ -303,6 +303,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39ce452925f2e7428143f2fbb6bcbc0, type: 3}
   m_Name: 
   Direction: -1
+  ReachDuration: .400000006
+  ComeBackDuration: .200000003
+  GrabRange: 4
   IdleMaterial: {fileID: 2100000, guid: d88b35cc485742943a6a4ae3d3fceac6, type: 2}
   PointMaterial: {fileID: 2100000, guid: 6f38dc30ec353a947859a1f91efa3bed, type: 2}
   GrabMaterial: {fileID: 2100000, guid: 1bf24e67715d1944b91e5fde351f462b, type: 2}
@@ -317,6 +320,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39ce452925f2e7428143f2fbb6bcbc0, type: 3}
   m_Name: 
   Direction: 1
+  ReachDuration: .400000006
+  ComeBackDuration: .200000003
+  GrabRange: 4
   IdleMaterial: {fileID: 2100000, guid: d88b35cc485742943a6a4ae3d3fceac6, type: 2}
   PointMaterial: {fileID: 2100000, guid: 6f38dc30ec353a947859a1f91efa3bed, type: 2}
   GrabMaterial: {fileID: 2100000, guid: 1bf24e67715d1944b91e5fde351f462b, type: 2}
