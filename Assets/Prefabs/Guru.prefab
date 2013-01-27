@@ -24,9 +24,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
-  - 114: {fileID: 11400002}
   m_Layer: 0
-  m_Name: RightHand
+  m_Name: Guru
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: .772499979, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
   m_Father: {fileID: 400002}
@@ -68,8 +67,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .75, y: .75, z: .75}
+  m_LocalPosition: {x: 0, y: .800000012, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
   m_Father: {fileID: 0}
@@ -96,7 +95,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 1bf24e67715d1944b91e5fde351f462b, type: 2}
+  - {fileID: 2100000, guid: 3bc2bc42da5bc334b809409902b99123, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -120,20 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b92bdc934c9d3ec4fa42c3d0e6d2a68c, type: 3}
   m_Name: 
   up: {x: 0, y: 1, z: 0}
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b39ce452925f2e7428143f2fbb6bcbc0, type: 3}
-  m_Name: 
-  Direction: 1
-  IdleMaterial: {fileID: 2100000, guid: d88b35cc485742943a6a4ae3d3fceac6, type: 2}
-  PointMaterial: {fileID: 2100000, guid: 6f38dc30ec353a947859a1f91efa3bed, type: 2}
-  GrabMaterial: {fileID: 2100000, guid: 1bf24e67715d1944b91e5fde351f462b, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

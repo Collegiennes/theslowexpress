@@ -9,7 +9,7 @@ public enum GamePhase
 
 class TimeKeeper : MonoBehaviour
 {
-    public float IntroDuration = 5;
+    public float IntroDuration = 2;
     public float MovementDuration = 4;
     public float GrabbingDuration = 2;
     public bool DebugMode = false;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class SpawnObstacles : MonoBehaviour
 {
     public List<Transform> obstaclePrefabs;
+    public Transform bubblePrefab;
 
 	void Start ()
     {
@@ -28,6 +29,14 @@ public class SpawnObstacles : MonoBehaviour
                     new Vector3(i+Random.value, 0, j+Random.value) * 30,
                     Quaternion.identity);
             }
+        }
+        for (int i = 0; i < 200; i++)
+        {
+            Instantiate(bubblePrefab,
+                new Vector3((Random.value - 0.5f) * 1000,
+                            Random.value * 8 + 1,
+                            Random.value * 1000),
+                Quaternion.identity);
         }
     }
 }
