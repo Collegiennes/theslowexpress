@@ -63,7 +63,7 @@ public class SpawnObstacles : MonoBehaviour
             obstacle.parent = go.transform;
         }
 
-        for (int t = 0; t < treesToSpawn; t++)
+        for (int t = 0; t < treesToSpawn / 4; t++)
         {
             Transform bubble = (Transform)Instantiate(bubblePrefab,
                 new Vector3(i + Random.value, 0, j + Random.value) * CellSize +
