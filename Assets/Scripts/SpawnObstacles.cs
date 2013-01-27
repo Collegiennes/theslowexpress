@@ -48,10 +48,10 @@ public class SpawnObstacles : MonoBehaviour
         r = (r * r)*0.75f+0.25f;
         //r *= 1 + Mathf.Abs(i/50.0f);
         r *= j/50.0f;
-        int treesToSpawn = PoisedNoise.RandomRound(r * 1.25f);
-        treesToSpawn = Mathf.FloorToInt(treesToSpawn) +
+        r *= 1.25f;
+        int treesToSpawn = Mathf.FloorToInt(r) +
             (PoisedNoise.UintToFloat(PoisedNoise.Hash((uint)i, (uint)j, 0xffffffff))
-                > Mathf.Repeat(treesToSpawn, 1) ? 0 : 1);
+                > Mathf.Repeat(r, 1) ? 0 : 1);
 
 
         for(int t = 0; t < treesToSpawn; t++)
@@ -67,7 +67,10 @@ public class SpawnObstacles : MonoBehaviour
             obstacle.parent = go.transform;
         }
 
-        for (int t = 0; t < treesToSpawn / 4; t++)
+        int bubblesToSpawn = Mathf.FloorToInt(r/4) +
+            (PoisedNoise.UintToFloat(PoisedNoise.Hash((uint)i, (uint)j, 0xfffffffe))
+                > Mathf.Repeat(r/4, 1) ? 0 : 1);
+        for (int t = 0; t < bubblesToSpawn; t++)
         {
             Transform bubble = (Transform)Instantiate(bubblePrefab,
                 new Vector3(i + Random.value, 0, j + Random.value) * CellSize +
