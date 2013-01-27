@@ -1217,8 +1217,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fe2b73a68794f74c9ba251160716651, type: 3}
   m_Name: 
-  IntroDuration: 3
-  MovementDuration: 6
+  IntroDuration: 1.5
+  MovementDuration: 7
   GrabbingDuration: 4
   DebugMode: 0
 --- !u!1 &2077250232

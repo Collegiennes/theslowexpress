@@ -165,7 +165,7 @@ class Hand : MonoBehaviour
     {
         if (!enabled) return;
 
-        if (isFired && collider.transform.GetComponent<Bubble>() != null)
+        if (collider.transform.GetComponent<Bubble>() != null)
             Destroy(collider.gameObject);
     }
 }
