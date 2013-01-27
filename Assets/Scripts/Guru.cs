@@ -2,8 +2,8 @@
 
 class Guru : MonoBehaviour
 {
-    public Material Dream;
-    public Material Shoot;
+    public Material Dream = null;
+    public Material Shoot = null;
 
     void Start()
     {

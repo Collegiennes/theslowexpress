@@ -161,4 +161,12 @@ class Hand : MonoBehaviour
             }
         }
     }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (!enabled) return;
+
+        if (isFired && collider.transform.GetComponent<Bubble>() != null)
+            Destroy(collider.gameObject);
+    }
 }

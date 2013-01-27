@@ -1,7 +1,7 @@
-// Unlit alpha-blended shader.
+// Unlit alpha-blended shader with tint!
 // - no lighting
 // - no lightmap support
-// - no per-material color
+// - totally coloring support
 
 Shader "Unlit/Transparent (with tint)" 
 {
