@@ -14,11 +14,11 @@ public class Background : MonoBehaviour
         Vector2 positionXZ = new Vector2(cameraPosition.x, cameraPosition.z);
 
         float additionalScale = cameraPosition.y;
-        transform.FindChild("Ground").localScale = new Vector3(32 + additionalScale, 32 + additionalScale, 32 + additionalScale);
-        transform.FindChild("Ground").localPosition = new Vector3(0, 0, 125 + additionalScale * 10);
+        //transform.FindChild("GroundMask").localScale = new Vector3(32 + additionalScale, 32 + additionalScale, 32 + additionalScale);
+        //transform.FindChild("GroundMask").localPosition = new Vector3(0, 1, 125 + additionalScale * 10);
 
         positionXZ = Vector2.Scale(positionXZ, new Vector2(1 / scaleXZ.x, 1 / scaleXZ.y));
 
-        transform.FindChild("Ground").renderer.material.SetTextureOffset("_GridTex", positionXZ);
+        transform.FindChild("GroundGrid").renderer.material.SetTextureOffset("_MainTex", positionXZ);
 	}
 }
