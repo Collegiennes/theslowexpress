@@ -7,13 +7,15 @@ public class Follow : MonoBehaviour
     public float distance;
 
 	void Update ()
-    {
+	{
+	    if (TimeKeeper.Instance.Phase == GamePhase.Grabbing) return;
+
         Vector3 delta = transform.position - target.position;
         if(delta != Vector3.zero)
         {
             Vector3 targetPos = target.position + delta.normalized * distance;
             transform.position = CoolSmooth.ExpoLinear(
-                transform.position, targetPos, 1, 100, Time.deltaTime);
+                transform.position, targetPos, 1, 100, TimeKeeper.Instance.DeltaTime);
         }
 	}
 }
