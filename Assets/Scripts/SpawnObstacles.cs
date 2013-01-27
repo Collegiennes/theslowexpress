@@ -21,7 +21,7 @@ public class SpawnObstacles : MonoBehaviour
 
         foreach(Vector2 cellKey in
             cells.Keys.Where(k => (Mathf.Abs(k.x - cx) > CellRange ||
-                                   Mathf.Abs(k.y - cy) > CellRange)).ToArray())
+                                   Mathf.Abs(k.y - cz) > CellRange)).ToArray())
         {
             Destroy(cells[cellKey]);
             cells.Remove(cellKey);
