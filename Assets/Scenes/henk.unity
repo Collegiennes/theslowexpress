@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Name: 
   IntroDuration: 3
   MovementDuration: 4
-  ShootingDuration: 2
+  GrabbingDuration: 2
   DebugMode: 0
 --- !u!1 &2098079683
 GameObject:

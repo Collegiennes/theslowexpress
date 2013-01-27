@@ -11,7 +11,7 @@ class TimeKeeper : MonoBehaviour
 {
     public float IntroDuration = 5;
     public float MovementDuration = 4;
-    public float ShootingDuration = 2;
+    public float GrabbingDuration = 2;
     public bool DebugMode = false;
 
     float PhaseTime;
@@ -64,7 +64,7 @@ class TimeKeeper : MonoBehaviour
                 break;
 
             case GamePhase.Moving:
-                TimeFactor = ShootingDuration / MovementDuration;
+                TimeFactor = GrabbingDuration / MovementDuration;
                 break;
         }
 
@@ -88,7 +88,7 @@ class TimeKeeper : MonoBehaviour
         switch (Phase)
         {
             case GamePhase.Moving: PhaseDuration = MovementDuration; break;
-            case GamePhase.Grabbing: PhaseDuration = ShootingDuration; break;
+            case GamePhase.Grabbing: PhaseDuration = GrabbingDuration; break;
         }
     }
 }
