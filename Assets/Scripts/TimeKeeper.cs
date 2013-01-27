@@ -44,6 +44,8 @@ class TimeKeeper : MonoBehaviour
         instance = null;
     }
 
+    float time = 8;
+
     void Start()
     {
         Phase = GamePhase.IntroFastMove;
@@ -54,6 +56,11 @@ class TimeKeeper : MonoBehaviour
 
     void Update()
     {
+        if(time > 0)
+        {
+            time -= Time.deltaTime;
+            return;
+        }
         PhaseTime += Time.deltaTime;
 
         switch (Phase)
