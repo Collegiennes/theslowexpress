@@ -163,6 +163,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 92741418}
   - 114: {fileID: 92741419}
+  - 114: {fileID: 92741420}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -197,6 +198,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e97956b35bae5946ae206a98e693edd, type: 3}
+  m_Name: 
+--- !u!114 &92741420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 92741417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d5cf67dffa2594bb926af34389ee4c, type: 3}
   m_Name: 
 --- !u!1001 &116845580
 Prefab:
@@ -1435,6 +1446,7 @@ GameObject:
   - 23: {fileID: 1877356202}
   - 114: {fileID: 2128630581}
   - 114: {fileID: 1877356201}
+  - 114: {fileID: 1877356204}
   m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
@@ -1492,6 +1504,16 @@ MeshFilter:
   m_PrefabInternal: {fileID: 287738334}
   m_GameObject: {fileID: 1877356199}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1877356204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1877356199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d5cf67dffa2594bb926af34389ee4c, type: 3}
+  m_Name: 
 --- !u!1 &1888060968
 GameObject:
   m_ObjectHideFlags: 0
