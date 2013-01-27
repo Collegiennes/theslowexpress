@@ -16,6 +16,6 @@ class PlayerTail : MonoBehaviour
         transform.FindChild("Sprite").GetComponentInChildren<Renderer>().material.SetTexture("_MainTex",
             PlayerLevelling.Instance.CurrentBodyTexture);
 
-        Debug.Log("level changed");
+        //Debug.Log("level changed");
     }
 }

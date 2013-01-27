@@ -16,7 +16,7 @@ class TimeKeeper : MonoBehaviour
 
     float PhaseTime;
     float PhaseDuration;
-    float TimeFactor;
+    public float TimeFactor { get; private set; }
 
     public float GlobalTime { get; private set; }
     public float TimeRatio { get; private set; }

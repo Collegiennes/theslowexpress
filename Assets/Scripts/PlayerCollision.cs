@@ -25,6 +25,7 @@ class PlayerCollision : MonoBehaviour
         if (other.transform.parent.parent.gameObject.name.StartsWith("Obstacle"))
         {
             sinceCollided = 0;
+            PlayerLevelling.Instance.OnCollide();
 
             StartCoroutine(ScreenShake());
             PlayerLevelling.Instance.Downgrade();

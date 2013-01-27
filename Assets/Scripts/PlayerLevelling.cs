@@ -8,9 +8,11 @@ class PlayerLevelling : MonoBehaviour
     public List<Texture2D> WingedTextures = new List<Texture2D>();
 
     public event Action LevelChanged;
+    public event Action Collided;
 
     int LevelAtMoveStart;
     int CurrentLevel;
+    bool FirstUpdate;
 
     public Texture2D CurrentBodyTexture
     {
@@ -19,6 +21,12 @@ class PlayerLevelling : MonoBehaviour
     public Texture2D CurrentWingedTexture
     {
         get { return WingedTextures[CurrentLevel]; }
+    }
+
+    public void OnCollide()
+    {
+        if (Collided != null)
+            Collided();
     }
 
     public void Downgrade()
@@ -64,8 +72,8 @@ class PlayerLevelling : MonoBehaviour
 
     void Start()
     {
-        CurrentLevel = 0;
-        if (LevelChanged != null) LevelChanged();
+        CurrentLevel = 3;
+        FirstUpdate = true;
 
         TimeKeeper.Instance.PhaseChanged += () =>
         {
@@ -81,6 +89,11 @@ class PlayerLevelling : MonoBehaviour
 
     void Update()
     {
+        if (FirstUpdate)
+        {
+            if (LevelChanged != null) LevelChanged();
+            FirstUpdate = false;
+        }
     }
 
     void ChangePhase()
