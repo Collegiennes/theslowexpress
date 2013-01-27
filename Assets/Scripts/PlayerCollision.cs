@@ -3,15 +3,32 @@ using UnityEngine;
 
 class PlayerCollision : MonoBehaviour
 {
+    float sinceCollided;
+
+    void Start()
+    {
+        PlayerLevelling.Instance.LevelChanged += OnLevelChanged;
+    }
+
+    void Update()
+    {
+        sinceCollided += Time.deltaTime;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (!other || !other.transform || !other.transform.parent || !other.transform.parent.parent)
             return;
 
+        if (sinceCollided < 0.25) return;
+
         if (other.transform.parent.parent.gameObject.name.StartsWith("Obstacle"))
         {
+            sinceCollided = 0;
+            PlayerLevelling.Instance.OnCollide();
+
             StartCoroutine(ScreenShake());
-            SendMessageUpwards("Downgrade", SendMessageOptions.DontRequireReceiver);
+            PlayerLevelling.Instance.Downgrade();
         }
     }
 
@@ -24,5 +41,13 @@ class PlayerCollision : MonoBehaviour
             Camera.mainCamera.transform.position += Random.insideUnitSphere * value;
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    void OnLevelChanged()
+    {
+        transform.parent.FindChild("Sprite").GetComponentInChildren<Renderer>().material.SetTexture("_MainTex",
+            PlayerLevelling.Instance.CurrentWingedTexture);
+
+        Debug.Log("level changed");
     }
 }

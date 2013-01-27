@@ -520,6 +520,7 @@ MonoBehaviour:
   m_Name: 
   Dream: {fileID: 2100000, guid: 3bc2bc42da5bc334b809409902b99123, type: 2}
   Shoot: {fileID: 2100000, guid: 1e7223139cce2974ca5d17bb851700e2, type: 2}
+  Hurt: {fileID: 2100000, guid: b2d114148953a954badf85fa2c8f4a28, type: 2}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

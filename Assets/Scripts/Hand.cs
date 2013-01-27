@@ -166,6 +166,9 @@ class Hand : MonoBehaviour
         if (!enabled) return;
 
         if (collider.transform.GetComponent<Bubble>() != null)
+        {
+            PlayerLevelling.Instance.Upgrade();
             Destroy(collider.gameObject);
+        }
     }
 }
