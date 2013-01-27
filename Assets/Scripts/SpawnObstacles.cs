@@ -49,6 +49,10 @@ public class SpawnObstacles : MonoBehaviour
         //r *= 1 + Mathf.Abs(i/50.0f);
         r *= j/50.0f;
         int treesToSpawn = PoisedNoise.RandomRound(r * 1.25f);
+        treesToSpawn = Mathf.FloorToInt(treesToSpawn) +
+            (PoisedNoise.UintToFloat(PoisedNoise.Hash((uint)i, (uint)j, 0xffffffff))
+                > Mathf.Repeat(treesToSpawn, 1) ? 0 : 1);
+
 
         for(int t = 0; t < treesToSpawn; t++)
         {
