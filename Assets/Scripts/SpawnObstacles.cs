@@ -8,7 +8,7 @@ public class SpawnObstacles : MonoBehaviour
     public Transform bubblePrefab;
 
     const float CellSize = 50;
-    const int CellRange = 5;
+    const int CellRange = 20;
 
     Dictionary<Vector2, GameObject> cells =
         new Dictionary<Vector2, GameObject>();
@@ -19,14 +19,16 @@ public class SpawnObstacles : MonoBehaviour
         int cx = Mathf.FloorToInt(playerPos.x/CellSize);
         int cz = Mathf.FloorToInt(playerPos.z/CellSize);
 
-        foreach(Vector2 cellKey in cells.Keys.Where(k => (Mathf.Abs(k.x - cx) > CellRange || k.y < cz - 1)).ToArray())
+        foreach(Vector2 cellKey in cells.Keys.Where(k =>
+                (Mathf.Abs(k.x - cx) > CellRange ||
+                 Mathf.Abs(k.x - cx) > CellRange)).ToArray())
         {
             Destroy(cells[cellKey]);
             cells.Remove(cellKey);
         }
 
-        for(int i = cx-5; i <= cx+5; i++)
-        for(int j = cz; j <= cz+5; j++)
+        for(int i = cx-CellRange; i <= cx+CellRange; i++)
+        for(int j = cz-CellRange; j <= cz+CellRange; j++)
         {
             Vector2 cellKey = new Vector2(i, j);
             if(!cells.ContainsKey(cellKey))
