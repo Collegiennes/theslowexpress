@@ -10,6 +10,8 @@ class MusicPitcher : MonoBehaviour
 
     void Update()
     {
+        audio.volume = CoolSmooth.ExpoLinear(audio.volume, TimeKeeper.Instance.Phase == GamePhase.Moving ? 0.25f : 0.6f, 0.9f, 0.25f,
+                                            Time.deltaTime);
         audio.pitch = CoolSmooth.ExpoLinear(audio.pitch, TimeKeeper.Instance.TimeFactor, 0.9f, 0.25f,
                                             Time.deltaTime);
     }
