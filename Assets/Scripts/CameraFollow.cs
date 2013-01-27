@@ -21,7 +21,7 @@ public class CameraFollow : MonoBehaviour
 
         if(TimeKeeper.Instance.GlobalTime != oldTime)
         {
-            vel = (transform.position - oldPosition) / (TimeKeeper.Instance.GlobalTime - oldTime);
+            vel = vel * 0.5f + 0.5f * (transform.position - oldPosition) / (TimeKeeper.Instance.GlobalTime - oldTime);
             oldPosition = transform.position;
             oldTime = TimeKeeper.Instance.GlobalTime;
         }
