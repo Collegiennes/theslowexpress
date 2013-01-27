@@ -19,9 +19,9 @@ public class SpawnObstacles : MonoBehaviour
         int cx = Mathf.FloorToInt(playerPos.x/CellSize);
         int cz = Mathf.FloorToInt(playerPos.z/CellSize);
 
-        foreach(Vector2 cellKey in cells.Keys.Where(k =>
-                (Mathf.Abs(k.x - cx) > CellRange ||
-                 Mathf.Abs(k.x - cx) > CellRange)).ToArray())
+        foreach(Vector2 cellKey in
+            cells.Keys.Where(k => (Mathf.Abs(k.x - cx) > CellRange ||
+                                   Mathf.Abs(k.y - cy) > CellRange)).ToArray())
         {
             Destroy(cells[cellKey]);
             cells.Remove(cellKey);
