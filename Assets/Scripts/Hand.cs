@@ -7,7 +7,6 @@ class Hand : MonoBehaviour
     public float ReachDuration = 1;
     public float ComeBackDuration = 1;
     public float GrabRange = 5;
-    public float FadeDuration = 0.5f;
 
     public Material IdleMaterial = null;
     public Material PointMaterial = null;
