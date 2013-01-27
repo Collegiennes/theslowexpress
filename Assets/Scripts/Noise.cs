@@ -3,6 +3,11 @@ using System.Collections;
 
 public class PoisedNoise : MonoBehaviour
 {
+    public static int RandomRound(float val)
+    {
+        return Mathf.FloorToInt(val) + (Random.value > Mathf.Repeat(val, 1) ? 0 : 1);
+    }
+
     public static uint Hash(uint x)
     {
         return someNumbers[x & 0xFF] ^ someNumbers[(x>>8) & 0xFF] ^
@@ -27,13 +32,27 @@ public class PoisedNoise : MonoBehaviour
     public static float FourOctaveHash(int x, int y)
     {
         return
-            UintToFloat(Hash((uint)x, (uint)y))/4 +
-            UintToFloat(Hash((uint)x/2, (uint)y/2))/4 +
-            UintToFloat(Hash((uint)x/4, (uint)y/4))/4 +
-            UintToFloat(Hash((uint)x/8, (uint)y/8))/4;
+            UintToFloat(Hash((uint)x, (uint)y))/3 +
+            UintToFloat(Hash((uint)x/2, (uint)y/2))/3 +
+            UintToFloat(Hash((uint)x/4, (uint)y/4))/6 +
+            UintToFloat(Hash((uint)x/8, (uint)y/8))/6;
     }
 
-    static uint[] someNumbers = new uint[256] { 641092716, 872704008,
+    static PoisedNoise()
+    {
+        ResetHash();
+    }
+
+    public static void ResetHash()
+    {
+        System.Random r = new System.Random();
+        for(int i = 0; i < someNumbers.Length; i++)
+        {
+            someNumbers[i] = (uint)(r.NextDouble() * 0x100000000);
+        }
+    }
+
+    static uint[] someNumbers = new uint[256]; /*{ 641092716, 872704008,
         3657282555, 516308364, 1034451792, 3844196931, 4274519439, 2894813462,
         2994169070, 4109363679, 724981356, 540033120, 1193709133, 3631984887,
         1246139533, 1516680397, 4107528615, 1393600033, 2251099226, 3014748,
@@ -76,6 +95,6 @@ public class PoisedNoise : MonoBehaviour
         2201421422, 2514037682, 3379663587, 2467636778, 2487691406, 1412999281,
         2955894878, 2512595846, 302261256, 1244435545, 2135490193, 437269536,
         2731099538, 1733217949, 1075216429, 4220909355, 1291360753, 1292802589,
-        1885528261, 445527324};
+        1885528261, 445527324};*/
 }
     
