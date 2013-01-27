@@ -10,21 +10,50 @@ class Hand : MonoBehaviour
 
     void Start()
     {
-        TimeKeeper.Instance.PhaseChanged += () =>
-        {
-            var visible = TimeKeeper.Instance.Phase == GamePhase.Grabbing;
+        TimeKeeper.Instance.PhaseChanged += EnableBasedOnState;
+        EnableBasedOnState();
+    }
 
-            enabled = visible;
-            foreach (var r in GetComponentsInChildren<Renderer>())
-                r.enabled = visible;
-        };
+    void EnableBasedOnState()
+    {
+        var visible = TimeKeeper.Instance.Phase == GamePhase.Grabbing;
+
+        enabled = visible;
+        foreach (var r in GetComponentsInChildren<Renderer>())
+            r.enabled = visible;
+    }
+
+    Vector2 RemoveDeadzone(Vector2 input, float deadzone, out bool deadzoned)
+    {
+        float mag = input.magnitude;
+        input = input / mag;
+        if (mag < deadzone)
+        {
+            deadzoned = true;
+            return Vector2.up;
+        }
+
+        mag = (mag - deadzone) / (1 - deadzone);
+        deadzoned = false;
+        return input * mag;
     }
 
     void Update()
     {
-        //float 
+        var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        bool deadzoned;
+        direction = RemoveDeadzone(direction, 0.15f, out deadzoned);
+        direction = direction.normalized;
 
-       // if (Direction == -1)
+        if (Mathf.Sign(direction.x) != Mathf.Sign(Direction) || deadzoned)
+        {
+            direction = transform.localPosition;
+            deadzoned = true;
+        }
 
+        transform.localPosition = CoolSmooth.ExpoLinear(transform.localPosition, direction, 0.99f, 5,
+                                                        TimeKeeper.Instance.DeltaTime);
+        GetComponentInChildren<Sprite>().up = transform.localPosition;
+        GetComponentInChildren<Renderer>().material = deadzoned ? IdleMaterial : PointMaterial;
     }
 }
