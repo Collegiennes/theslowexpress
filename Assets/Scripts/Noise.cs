@@ -3,6 +3,11 @@ using System.Collections;
 
 public class PoisedNoise : MonoBehaviour
 {
+    public static int RandomRound(float val)
+    {
+        return Mathf.FloorToInt(val) + (Random.value > Mathf.Repeat(val, 1) ? 0 : 1);
+    }
+
     public static uint Hash(uint x)
     {
         return someNumbers[x & 0xFF] ^ someNumbers[(x>>8) & 0xFF] ^
