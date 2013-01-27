@@ -8,8 +8,14 @@ public class Background : MonoBehaviour
         Vector3 cameraPosition = Camera.main.transform.position;
 	    transform.position = new Vector3(cameraPosition.x, 0, cameraPosition.z);
 
-        Vector2 scaleXZ = new Vector2(transform.localScale.x, transform.localScale.z);
-        scaleXZ *= 20;
+        var gridChild = transform.FindChild("GroundGrid");
+
+        Vector2 scaleXZ = new Vector2(transform.localScale.x * gridChild.localScale.x, 
+                                      transform.localScale.z * gridChild.localScale.z);
+        scaleXZ *= 10;
+
+        var ts = gridChild.renderer.material.GetTextureScale("_MainTex");
+        scaleXZ.Scale(new Vector2(1 / ts.x, 1 / ts.y));
 
         Vector2 positionXZ = new Vector2(cameraPosition.x, cameraPosition.z);
 
@@ -19,6 +25,6 @@ public class Background : MonoBehaviour
 
         positionXZ = Vector2.Scale(positionXZ, new Vector2(1 / scaleXZ.x, 1 / scaleXZ.y));
 
-        transform.FindChild("GroundGrid").renderer.material.SetTextureOffset("_MainTex", positionXZ);
+        gridChild.renderer.material.SetTextureOffset("_MainTex", positionXZ);
 	}
 }
