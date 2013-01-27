@@ -19,12 +19,16 @@ public class SpawnObstacles : MonoBehaviour
             float r = PoisedNoise.FourOctaveHash(i+1000, j+100000);
             r = r * r;
             int treesToSpawn = Mathf.FloorToInt(r * 10);
+            treesToSpawn += (int)Mathf.Abs(i);
             //treesToSpawn += (j-50)/10;
 
             for(int t = 0; t < treesToSpawn; t++)
             {
-                Transform prefab = obstaclePrefabs[Mathf.FloorToInt(
-                    PoisedNoise.UintToFloat(PoisedNoise.Hash((uint)i, (uint)j, (uint)t))*obstaclePrefabs.Count)];
+                int index = Mathf.FloorToInt(
+                    PoisedNoise.UintToFloat(PoisedNoise.Hash((uint)i, (uint)j,
+                            (uint)t))*obstaclePrefabs.Count);
+                if(index >= obstaclePrefabs.Count) index = obstaclePrefabs.Count-1;
+                Transform prefab = obstaclePrefabs[index];
                 Instantiate(prefab,
                     new Vector3(i+Random.value, 0, j+Random.value) * 30,
                     Quaternion.identity);

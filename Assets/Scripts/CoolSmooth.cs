@@ -27,7 +27,6 @@ public class CoolSmooth
         if(angle > 0)
         {
             float t = ExpoLinear(0, angle, exp, lin, time) / angle;
-            //Debug.Log(current + " " + target);
             return Quaternion.Slerp(current, target, t);
         }
         else
