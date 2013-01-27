@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 class Hand : MonoBehaviour
 {
@@ -6,6 +7,7 @@ class Hand : MonoBehaviour
     public float ReachDuration = 1;
     public float ComeBackDuration = 1;
     public float GrabRange = 5;
+    public float FadeDuration = 0.5f;
 
     public Material IdleMaterial = null;
     public Material PointMaterial = null;
@@ -14,23 +16,58 @@ class Hand : MonoBehaviour
     bool isFired, isComingBack;
     float sinceFired, sinceComingBack;
     Vector3 firedDirection;
+    float sinceIdle;
+    float sinceDisabled;
 
     void Start()
     {
         if (!TimeKeeper.Instance.DebugMode)
         {
-            TimeKeeper.Instance.PhaseChanged += EnableBasedOnState;
-            EnableBasedOnState();
+            TimeKeeper.Instance.PhaseChanged += () => EnableBasedOnState(true);
+            EnableBasedOnState(false);
         }
     }
 
-    void EnableBasedOnState()
+    void EnableBasedOnState(bool fade)
     {
         var visible = TimeKeeper.Instance.Phase == GamePhase.Grabbing;
 
         enabled = visible;
         foreach (var r in GetComponentsInChildren<Renderer>())
-            r.enabled = visible;
+        {
+            if (visible)
+            {
+                r.material.SetColor("_Color", new Color(1, 1, 1, 1));
+                r.enabled = true;
+            }
+            else
+            {
+                if (fade)
+                    StartCoroutine(FadeAlpha(r));
+                else
+                    r.enabled = false;
+            }
+        }
+
+        if (visible)
+        {
+            transform.localPosition = new Vector3(Direction, 0, 0);
+            GetComponentInChildren<Sprite>().up = Vector3.Normalize(transform.localPosition);
+        }
+    }
+
+    IEnumerator FadeAlpha(Renderer r)
+    {
+        float alpha = 1;
+        while (alpha > Mathf.Epsilon)
+        {
+            if (enabled) break;
+
+            alpha = CoolSmooth.ExpoLinear(alpha, 0, 0.9f, 1f, Time.deltaTime);
+            r.material.SetColor("_Color", new Color(1, 1, 1, alpha));
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        r.enabled = enabled;
     }
 
     Vector2 RemoveDeadzone(Vector2 input, float deadzone, out bool deadzoned)
@@ -55,18 +92,32 @@ class Hand : MonoBehaviour
         direction = RemoveDeadzone(direction, 0.15f, out deadzoned);
         direction = direction.normalized;
 
+        if (direction.y < -0.7f)
+        {
+            direction.y = -0.7f;
+            direction.x = 0.7f * Mathf.Sign(direction.x);
+            direction = direction.normalized;
+        }
+
         if (Mathf.Sign(direction.x) != Mathf.Sign(Direction) || deadzoned)
         {
             direction = transform.localPosition;
             deadzoned = true;
+
+            sinceIdle += TimeKeeper.Instance.DeltaTime;
+            if (sinceIdle > 0.75f)
+                direction = CoolSmooth.ExpoLinear(direction, new Vector3(Direction, 0, 0), 0.9f, 1,
+                                                  TimeKeeper.Instance.DeltaTime);
         }
+        else
+            sinceIdle = 0;
 
         if (isFired)
         {
             sinceFired += TimeKeeper.Instance.DeltaTime;
             var destination = firedDirection * GrabRange;
 
-            transform.localPosition = CoolSmooth.ExpoLinear(transform.localPosition, destination, 0.999f, 0.5f,
+            transform.localPosition = CoolSmooth.ExpoLinear(transform.localPosition, destination, 0.99f, 5,
                                                             TimeKeeper.Instance.DeltaTime);
 
             GetComponentInChildren<Sprite>().up = Vector3.Normalize(transform.localPosition);
@@ -84,7 +135,7 @@ class Hand : MonoBehaviour
             sinceComingBack += TimeKeeper.Instance.DeltaTime;
             var destination = firedDirection;
 
-            transform.localPosition = CoolSmooth.ExpoLinear(transform.localPosition, destination, 0.9999f, 10,
+            transform.localPosition = CoolSmooth.ExpoLinear(transform.localPosition, destination, 0.9999f, 15,
                                                             TimeKeeper.Instance.DeltaTime);
 
             GetComponentInChildren<Renderer>().material = IdleMaterial;
