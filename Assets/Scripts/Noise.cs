@@ -27,10 +27,10 @@ public class PoisedNoise : MonoBehaviour
     public static float FourOctaveHash(int x, int y)
     {
         return
-            UintToFloat(Hash((uint)x, (uint)y))/4 +
-            UintToFloat(Hash((uint)x/2, (uint)y/2))/4 +
-            UintToFloat(Hash((uint)x/4, (uint)y/4))/4 +
-            UintToFloat(Hash((uint)x/8, (uint)y/8))/4;
+            UintToFloat(Hash((uint)x, (uint)y))/3 +
+            UintToFloat(Hash((uint)x/2, (uint)y/2))/3 +
+            UintToFloat(Hash((uint)x/4, (uint)y/4))/6 +
+            UintToFloat(Hash((uint)x/8, (uint)y/8))/6;
     }
 
     static PoisedNoise()

@@ -7,8 +7,8 @@ public class SpawnObstacles : MonoBehaviour
     public List<Transform> obstaclePrefabs;
     public Transform bubblePrefab;
 
-    const float CellSize = 50;
-    const int CellRange = 20;
+    const float CellSize = 20;
+    const int CellRange = 5;
 
     Dictionary<Vector2, GameObject> cells =
         new Dictionary<Vector2, GameObject>();
@@ -45,10 +45,10 @@ public class SpawnObstacles : MonoBehaviour
         int j = (int)cell.y;
 
         float r = PoisedNoise.FourOctaveHash(i, j);
-        r = r * Mathf.Sqrt(r);
-        int treesToSpawn = Mathf.FloorToInt(r * 10);
-        treesToSpawn += (int)Mathf.Abs(i);
-        treesToSpawn += (j-50)/10;
+        r = (r * r)*0.75f+0.25f;
+        r *= 1 + Mathf.Abs(i/50.0f);
+        r *= j/50.0f;
+        int treesToSpawn = Mathf.FloorToInt(r * 5);
 
         for(int t = 0; t < treesToSpawn; t++)
         {
