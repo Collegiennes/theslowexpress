@@ -405,11 +405,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 727e9bda2267fc946ad940baed836923, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 6.37475887e-06
+      value: 1.09935418e-05
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 727e9bda2267fc946ad940baed836923, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 72.9187775
+      value: 125.751495
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 727e9bda2267fc946ad940baed836923, type: 2}
       propertyPath: m_LocalScale.x
@@ -433,15 +433,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 727e9bda2267fc946ad940baed836923, type: 2}
       propertyPath: m_LocalScale.x
-      value: 19.1597996
+      value: 31.9629974
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 727e9bda2267fc946ad940baed836923, type: 2}
       propertyPath: m_LocalScale.y
-      value: 19.1597996
+      value: 31.9629974
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 727e9bda2267fc946ad940baed836923, type: 2}
       propertyPath: m_LocalScale.z
-      value: 19.1597996
+      value: 31.9629974
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 727e9bda2267fc946ad940baed836923, type: 2}
@@ -792,8 +792,8 @@ Transform:
   m_PrefabInternal: {fileID: 876222076}
   m_GameObject: {fileID: 1249545917}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
-  m_LocalPosition: {x: 6.37475887e-06, y: 0, z: 72.9187775}
-  m_LocalScale: {x: 19.1597996, y: 19.1597996, z: 19.1597996}
+  m_LocalPosition: {x: 1.09935418e-05, y: 0, z: 125.751495}
+  m_LocalScale: {x: 31.9629974, y: 31.9629974, z: 31.9629974}
   m_Children: []
   m_Father: {fileID: 92741418}
 --- !u!1 &1477584668
@@ -838,9 +838,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39ce452925f2e7428143f2fbb6bcbc0, type: 3}
   m_Name: 
   Direction: -1
-  ReachDuration: 1
-  ComeBackDuration: 1
-  GrabRange: 5
+  ReachDuration: .300000012
+  ComeBackDuration: .150000006
+  GrabRange: 4
   IdleMaterial: {fileID: 2100000, guid: d88b35cc485742943a6a4ae3d3fceac6, type: 2}
   PointMaterial: {fileID: 2100000, guid: 6f38dc30ec353a947859a1f91efa3bed, type: 2}
   GrabMaterial: {fileID: 2100000, guid: 1bf24e67715d1944b91e5fde351f462b, type: 2}
@@ -1160,9 +1160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39ce452925f2e7428143f2fbb6bcbc0, type: 3}
   m_Name: 
   Direction: 1
-  ReachDuration: 1
-  ComeBackDuration: 1
-  GrabRange: 5
+  ReachDuration: .300000012
+  ComeBackDuration: .150000006
+  GrabRange: 4
   IdleMaterial: {fileID: 2100000, guid: d88b35cc485742943a6a4ae3d3fceac6, type: 2}
   PointMaterial: {fileID: 2100000, guid: 6f38dc30ec353a947859a1f91efa3bed, type: 2}
   GrabMaterial: {fileID: 2100000, guid: 1bf24e67715d1944b91e5fde351f462b, type: 2}
@@ -1330,7 +1330,7 @@ MonoBehaviour:
   IntroDuration: 1.5
   MovementDuration: 7
   GrabbingDuration: 4
-  DebugMode: 0
+  DebugMode: 1
 --- !u!1 &2077250232
 GameObject:
   m_ObjectHideFlags: 0
