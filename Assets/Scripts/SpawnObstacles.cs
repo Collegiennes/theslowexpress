@@ -37,6 +37,11 @@ public class SpawnObstacles : MonoBehaviour
             }
         }
 	}
+
+    float Rand(int i, int j, int n)
+    {
+        return PoisedNoise.UintToFloat(PoisedNoise.Hash((uint)i, (uint)j, (uint)n));
+    }
 	
     GameObject SpawnRegion(Vector2 cell)
     {
@@ -50,8 +55,7 @@ public class SpawnObstacles : MonoBehaviour
         r *= j/50.0f;
         r *= 1.25f;
         int treesToSpawn = Mathf.FloorToInt(r) +
-            (PoisedNoise.UintToFloat(PoisedNoise.Hash((uint)i, (uint)j, 0xffffffff))
-                > Mathf.Repeat(r, 1) ? 0 : 1);
+            (Rand(i, j, 0x7fffffff) > Mathf.Repeat(r, 1) ? 0 : 1);
 
 
         for(int t = 0; t < treesToSpawn; t++)
@@ -62,19 +66,19 @@ public class SpawnObstacles : MonoBehaviour
             if(index >= obstaclePrefabs.Count) index = obstaclePrefabs.Count-1;
             Transform prefab = obstaclePrefabs[index];
             Transform obstacle = (Transform)Instantiate(prefab,
-                new Vector3(i+Random.value, 0, j+Random.value) * CellSize,
+                new Vector3(i+Rand(i,j,t*2), 0, j+Rand(i,j,t*2+1)) * CellSize,
                 Quaternion.identity);
             obstacle.parent = go.transform;
         }
 
         int bubblesToSpawn = Mathf.FloorToInt(r/4) +
-            (PoisedNoise.UintToFloat(PoisedNoise.Hash((uint)i, (uint)j, 0xfffffffe))
+            (PoisedNoise.UintToFloat(PoisedNoise.Hash((uint)i, (uint)j, 0x7ffffffe))
                 > Mathf.Repeat(r/4, 1) ? 0 : 1);
         for (int t = 0; t < bubblesToSpawn; t++)
         {
             Transform bubble = (Transform)Instantiate(bubblePrefab,
-                new Vector3(i + Random.value, 0, j + Random.value) * CellSize +
-                    Vector3.up * (1 + Random.value * 8),
+                new Vector3(i+Rand(i,j,t*3), 0, j+Rand(i,j,t*3+1)) * CellSize +
+                    Vector3.up * (1 + Rand(i,j,t*3+2) * 8),
                 Quaternion.identity);
             bubble.parent = go.transform;
         }

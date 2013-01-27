@@ -12,7 +12,7 @@ public class TailSpawner : MonoBehaviour
 	    for(int i = 0; i < length; i++)
         {
             Follow tailElement = (Follow)Instantiate(
-                tailPrefab, transform.position, transform.rotation);
+                tailPrefab, target.transform.position + new Vector3(0, 0, -0.75f), transform.rotation);
             tailElement.target = target;
             target = tailElement.transform;
         }

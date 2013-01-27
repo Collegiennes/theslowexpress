@@ -22,8 +22,15 @@ public class PlayerMotion : MonoBehaviour
         }
     }
 	
+    float time = 8;
     void Update()
     {
+        if(time > 0)
+        {
+            time -= Time.deltaTime;
+            return;
+        }
+
         switch (TimeKeeper.Instance.Phase)
         {
             case GamePhase.Moving:
