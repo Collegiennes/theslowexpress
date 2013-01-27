@@ -31,7 +31,7 @@ public class PlayerMotion : MonoBehaviour
                 if(input.sqrMagnitude > 1) input = input.normalized;
                 input = RemoveDeadzone(input, 0.1f);
                 if(input.sqrMagnitude > 0) input = input / Mathf.Sqrt(input.magnitude);
-                Vector3 targetVelocity = 40 * input + Vector3.forward * 20;
+                Vector3 targetVelocity = 40 * input + Vector3.forward * 40;
 
                 velocity = CoolSmooth.ExpoLinear(
                     velocity, targetVelocity, 0.99f, 40, TimeKeeper.Instance.DeltaTime);
