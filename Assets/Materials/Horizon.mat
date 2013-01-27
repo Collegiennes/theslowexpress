@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Horizon
-  m_Shader: {fileID: 4800000, guid: 6b196952f5bb5bc488377b3123fbd5cb, type: 3}
+  m_Shader: {fileID: 4800000, guid: ac6cdddd9ccd5dd46aeb56c61a41f5c0, type: 3}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -60,7 +60,15 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+    m_Floats:
+      data:
+        first:
+          name: _InvertFactor
+        second: 0
+      data:
+        first:
+          name: _Saturation
+        second: 0
     m_Colors:
       data:
         first:

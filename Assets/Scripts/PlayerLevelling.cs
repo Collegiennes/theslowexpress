@@ -72,7 +72,7 @@ class PlayerLevelling : MonoBehaviour
 
     void Start()
     {
-        CurrentLevel = 3;
+        CurrentLevel = 1;
         FirstUpdate = true;
 
         TimeKeeper.Instance.PhaseChanged += () =>
