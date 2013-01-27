@@ -16,7 +16,7 @@ class StateRecorder : MonoBehaviour
         TimeKeeper.PhaseChanged += OnPhaseChanged;
     }
 
-    void Update()
+    void LateUpdate()
     {
         var timeRatio = TimeKeeper.TimeRatio;
 

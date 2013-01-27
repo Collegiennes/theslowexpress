@@ -15,7 +15,7 @@ public class CameraFollow : MonoBehaviour
         oldPosition = transform.position;
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (TimeKeeper.Instance.Phase == GamePhase.Grabbing) return;
 

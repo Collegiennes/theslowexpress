@@ -6,7 +6,7 @@ public class Follow : MonoBehaviour
     public Transform target;
     public float distance;
 
-	void Update ()
+	void LateUpdate ()
 	{
 	    if (TimeKeeper.Instance.Phase == GamePhase.Grabbing) return;
 

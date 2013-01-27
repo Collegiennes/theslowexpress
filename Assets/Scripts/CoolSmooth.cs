@@ -5,18 +5,32 @@ public class CoolSmooth
     public static Vector3 ExpoLinear(Vector3 current, Vector3 target,
         float exp, float lin, float time)
     {
-        float t = Mathf.Pow((1-exp), time);
-        current = current * t + target * (1-t);
-        current = Vector3.MoveTowards(current, target, lin*time);
-        return current;
+        float mag = (current - target).magnitude;
+        return current + (target-current) * ExpoLinear(0, 1, exp, lin/mag, time);
     }
 
+    const float dt = 0.001f;
     public static float ExpoLinear(float current, float target,
-        float exp, float lin, float time)
+        float exp, float lin, float totalTime)
     {
-        float t = Mathf.Pow((1-exp), time);
-        current = current * t + target * (1-t);
-        current = Mathf.MoveTowards(current, target, lin*time);
+        while(totalTime > 0)
+        {
+            float time;
+            if(totalTime > dt)
+            {
+                time = dt;
+                totalTime -= dt;
+            }
+            else
+            {
+                time = totalTime;
+                totalTime = 0;
+            }
+            float t = Mathf.Pow((1-exp), time);
+            current += (1-t) * (target - current);
+            current = Mathf.MoveTowards(current, target, lin*time);
+        }
+
         return current;
     }
 
