@@ -13,7 +13,7 @@ public class Background : MonoBehaviour
 
         Vector2 positionXZ = new Vector2(cameraPosition.x, cameraPosition.z);
 
-        float additionalScale = cameraPosition.y;
+        //float additionalScale = cameraPosition.y;
         //transform.FindChild("GroundMask").localScale = new Vector3(32 + additionalScale, 32 + additionalScale, 32 + additionalScale);
         //transform.FindChild("GroundMask").localPosition = new Vector3(0, 1, 125 + additionalScale * 10);
 
