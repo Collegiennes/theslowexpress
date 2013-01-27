@@ -9,7 +9,7 @@ public class Background : MonoBehaviour
 	    transform.position = new Vector3(cameraPosition.x, 0, cameraPosition.z);
 
         Vector2 scaleXZ = new Vector2(transform.localScale.x, transform.localScale.z);
-        scaleXZ *= 10;
+        scaleXZ *= 20;
 
         Vector2 positionXZ = new Vector2(cameraPosition.x, cameraPosition.z);
 
