@@ -30,7 +30,7 @@ public class CameraFollow : MonoBehaviour
         Vector3 targetPos = transform.position + new Vector3(0, 2, -distance);
 
         ct.position = CoolSmooth.ExpoLinear(ct.position, targetPos,
-            0.9995f, 10, TimeKeeper.Instance.DeltaTime);
+            0.9999f, 15, TimeKeeper.Instance.DeltaTime);
 
         ct.rotation = CoolSmooth.ExpoLinear(ct.rotation,
             Quaternion.LookRotation(transform.position + vel * 0.05f - ct.position),

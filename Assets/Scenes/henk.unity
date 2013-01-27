@@ -692,7 +692,13 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a9e54e0007de1249b10ffc86b9db8c7, type: 3}
   m_Name: 
-  obstaclePrefab: {fileID: 400002, guid: e0a68f45f54a4cf44a1ae58b137e0026, type: 2}
+  obstaclePrefabs:
+  - {fileID: 400002, guid: e0a68f45f54a4cf44a1ae58b137e0026, type: 2}
+  - {fileID: 400002, guid: ea0d4ff71679c414fb2162b95072b32a, type: 2}
+  - {fileID: 400002, guid: 6b1ec6fdc2b23104aa6dc1e635d88b89, type: 2}
+  - {fileID: 400002, guid: e739331d7692b73489e4988fbfc8032a, type: 2}
+  - {fileID: 400002, guid: e9952edb92e8b05449a9b2e5faf7db0c, type: 2}
+  - {fileID: 400002, guid: 24178cd8e70ab07498cde0f5d5ba723e, type: 2}
   bubblePrefab: {fileID: 400002, guid: b6b8a8bc199ee304c91052e308784e75, type: 2}
 --- !u!1 &1224681335
 GameObject:
@@ -832,9 +838,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39ce452925f2e7428143f2fbb6bcbc0, type: 3}
   m_Name: 
   Direction: -1
-  ReachDuration: .300000012
-  ComeBackDuration: .150000006
-  GrabRange: 4
+  ReachDuration: 1
+  ComeBackDuration: 1
+  GrabRange: 5
   IdleMaterial: {fileID: 2100000, guid: d88b35cc485742943a6a4ae3d3fceac6, type: 2}
   PointMaterial: {fileID: 2100000, guid: 6f38dc30ec353a947859a1f91efa3bed, type: 2}
   GrabMaterial: {fileID: 2100000, guid: 1bf24e67715d1944b91e5fde351f462b, type: 2}
@@ -1154,9 +1160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39ce452925f2e7428143f2fbb6bcbc0, type: 3}
   m_Name: 
   Direction: 1
-  ReachDuration: .300000012
-  ComeBackDuration: .150000006
-  GrabRange: 4
+  ReachDuration: 1
+  ComeBackDuration: 1
+  GrabRange: 5
   IdleMaterial: {fileID: 2100000, guid: d88b35cc485742943a6a4ae3d3fceac6, type: 2}
   PointMaterial: {fileID: 2100000, guid: 6f38dc30ec353a947859a1f91efa3bed, type: 2}
   GrabMaterial: {fileID: 2100000, guid: 1bf24e67715d1944b91e5fde351f462b, type: 2}
